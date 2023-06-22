@@ -3,7 +3,8 @@ import View from './View.js';
 // Importing icons from dist folder
 // import icons from '../img/icons.svg'; // parcel 1
 import icons from 'url:../../img/icons.svg'; // parcel 2
-import { Fraction } from './View.js/fractional';
+var Fraction = require('fractional').Fraction;
+// import { Fraction } from 'fractional';
 // console.log(Fraction);
 
 class RecipeView extends View {
