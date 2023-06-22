@@ -7,7 +7,7 @@
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist"
   },
-  "author": "Bibhash lenka", 
+  "author": "Bibhash lenka",
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.31.0",
