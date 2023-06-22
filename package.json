@@ -11,12 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.31.0",
-    "fraction": "^0.2.0",
-    "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.11",
     "sass": "^1.63.4"
   },
   "devDependencies": {
+    "fractional": "^1.0.0",
     "parcel": "^2.9.2",
     "process": "^0.11.10"
   }
