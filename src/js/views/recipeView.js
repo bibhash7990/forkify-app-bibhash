@@ -3,8 +3,9 @@ import View from './View.js';
 // Importing icons from dist folder
 // import icons from '../img/icons.svg'; // parcel 1
 import icons from 'url:../../img/icons.svg'; // parcel 2
-var Fraction = require('Fraction').Fraction;
+// var Fraction = require('fractional').Fraction;
 // import { Fraction } from 'fractional';
+
 // console.log(Fraction);
 
 class RecipeView extends View {
@@ -123,19 +124,43 @@ class RecipeView extends View {
   }
 
   _generateMarkupIngredient(ing) {
+    const formatQuantity = quantity => {
+      if (quantity) {
+        // Split the quantity into whole number and decimal parts
+        const [whole, decimal] = quantity.toString().split('.');
+
+        // If there is no decimal part, return the whole number as-is
+        if (!decimal || decimal === '0') {
+          return whole;
+        }
+
+        // Convert the decimal part to a fraction
+        const decimalFraction = Math.round(parseFloat(`0.${decimal}`) * 100);
+        const fraction = `${decimalFraction}/100`;
+
+        // If the whole number is 0, return only the fraction
+        if (whole === '0') {
+          return fraction;
+        }
+
+        // Return the whole number and fraction combined
+        return `${whole} ${fraction}`;
+      }
+
+      return '';
+    };
+
     return `
-      <li class="recipe__ingredient">
-        <svg class="recipe__icon">
-          <use href="${icons}#icon-check"></use>
-        </svg>
-        <div class="recipe__quantity">${
-          ing.quantity ? new Fraction(ing.quantity).toString() : ''
-        }</div>
-        <div class="recipe__description">
-          <span class="recipe__unit">${ing.unit}</span>
-          ${ing.description}
-        </div>
-      </li> 
+    <li class="recipe__ingredient">
+      <svg class="recipe__icon">
+        <use href="${icons}#icon-check"></use>
+      </svg>
+      <div class="recipe__quantity">${formatQuantity(ing.quantity)}</div>
+      <div class="recipe__description">
+        <span class="recipe__unit">${ing.unit}</span>
+        ${ing.description}
+      </div>
+    </li> 
       `;
   }
 }
